@@ -29,3 +29,13 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.username}>'
+    
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(50), unique=True, nullable=False)
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(200), unique=True, nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+    stock_total = db.Column(db.Integer, nullable=False)
