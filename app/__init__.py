@@ -4,6 +4,7 @@ from app.models import db
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
+from .seeders import seed_tipos_usuarios, seed_usuarios, seed_almacenes, seed_categorias
 
 bcrypt = Bcrypt()
 jwt = JWTManager()
@@ -24,6 +25,10 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+        seed_tipos_usuarios()
+        seed_usuarios()
+        seed_almacenes()
+        seed_categorias()
 
     # Registro de las rutas
     from app.routes import main
